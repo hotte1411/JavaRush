@@ -27,60 +27,38 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Solution
-{
-    public static void main(String[] args)
-    {
+public class Solution {
+    public static void main(String[] args) {
         //add your code here
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String url = scanner.nextLine();
-        url = url.substring(url.indexOf('?') + 1, url.length());
-        String[] splitUrl = url.split("&");
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        for (String parameter : splitUrl)
-        {
-            String[] splitParameters = parameter.split("=");
-            if (splitParameters.length > 1)
-            {
-                parameters.put(splitParameters[0], splitParameters[1]);
-            } else
-            {
-                parameters.put(splitParameters[0], null);
-            }
-        }
+        LinkedHashMap<String, String> parameters = Parser.parse(url);
 
         StringBuilder outString = new StringBuilder();
-
-        for (Map.Entry<String, String> pair : parameters.entrySet())
-        {
+        for (Map.Entry<String, String> pair : parameters.entrySet()) {
             outString.append(pair.getKey())
                     .append(" ");
         }
 
         System.out.println(outString.toString());
 
-        if (parameters.containsKey("obj"))
-        {
+        if (parameters.containsKey("obj")) {
             String objValue = parameters.get("obj");
-            if (objValue.matches("\\d*\\.?\\d+"))
-            {
+            if (objValue.matches("\\d*\\.?\\d+")) {
                 double value = Double.parseDouble(objValue);
                 alert(value);
-            } else
-            {
+            } else {
                 alert(objValue);
             }
         }
 
     }
 
-    public static void alert(double value)
-    {
+    public static void alert(double value) {
         System.out.println("double " + value);
     }
 
-    public static void alert(String value)
-    {
+    public static void alert(String value) {
         System.out.println("String " + value);
     }
 }
