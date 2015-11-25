@@ -1,7 +1,6 @@
-package com.javarush.test.level25.lesson02.home01;
+package com.javarush.test.level15.lesson12.home09;
 
 
-import com.javarush.test.level15.lesson12.home09.ParserUrlToParameters;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

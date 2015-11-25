@@ -28,20 +28,28 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Solution {
+    private static LinkedHashMap<String, String> parameters;
+
     public static void main(String[] args) {
-        //add your code here
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String url = scanner.nextLine();
-        LinkedHashMap<String, String> parameters = Parser.parse(url);
+
+        System.out.println(getResultFromUrl(url));
+        invokeAlert();
+    }
+
+    public static String getResultFromUrl(String url) {
+        parameters = ParserUrlToParameters.parse(url);
 
         StringBuilder outString = new StringBuilder();
         for (Map.Entry<String, String> pair : parameters.entrySet()) {
             outString.append(pair.getKey())
                     .append(" ");
         }
+        return outString.toString().trim();
+    }
 
-        System.out.println(outString.toString());
-
+    public static void invokeAlert() {
         if (parameters.containsKey("obj")) {
             String objValue = parameters.get("obj");
             if (objValue.matches("\\d*\\.?\\d+")) {
@@ -51,7 +59,6 @@ public class Solution {
                 alert(objValue);
             }
         }
-
     }
 
     public static void alert(double value) {
@@ -61,4 +68,6 @@ public class Solution {
     public static void alert(String value) {
         System.out.println("String " + value);
     }
+
+
 }
