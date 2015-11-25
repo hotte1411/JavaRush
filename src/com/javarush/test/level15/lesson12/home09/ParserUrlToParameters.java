@@ -5,13 +5,13 @@ import java.util.LinkedHashMap;
 
 public class ParserUrlToParameters {
 
-    public static LinkedHashMap<String, String> parse(String URL) {
+    public static LinkedHashMap<String, String> parse(String url) {
 
-        String parametersFromUrl = URL.substring(URL.indexOf('?') + 1);
+        String parametersFromUrl = url.substring(url.indexOf('?') + 1);
         String[] splittedUrl = parametersFromUrl.split("&");
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        for (String parameter : splittedUrl) {
-            String[] splittedParameters = parameter.split("=");
+        for (String parameterAndValue : splittedUrl) {
+            String[] splittedParameters = parameterAndValue.split("=");
             if (splittedParameters.length > 1) {
                 parameters.put(splittedParameters[0], splittedParameters[1]);
             } else {
